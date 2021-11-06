@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import Nav from "./components/Nav";
+import Store from "./components/Store";
+import Cart from "./components/Cart";
+import Admin from "./components/Admin";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let style = {
+        display: "flex",
+        justifyContent: "center"
+    }
+
+    return (
+        <Router>
+            <Nav/>
+            <div className="App" style={style}>
+                <Switch>
+                    <Route exact path={"/"} component={Store}/>
+                    <Route path={"/cart"} component={Cart}/>
+                    <Route path={"/admin"} component={Admin}/>
+                </Switch>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
