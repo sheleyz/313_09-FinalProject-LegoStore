@@ -19,6 +19,20 @@ function Cart() {
         textAlign: "center"
     }
 
+    let totalStyle = {
+        position: "fixed",
+        bottom: "0",
+        right: "0",
+        height: "50px",
+        width: "100vw",
+        padding: "10px",
+        paddingRight: "20px",
+        backgroundColor: "darkgrey",
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center"
+    }
+
     const dispatch = useDispatch();
     const removeFromCart = (product) => {
         dispatch(remove_from_cart(product));
@@ -45,10 +59,15 @@ function Cart() {
         </div>
     );
 
+    const totalPrice = useSelector(state => state.cart).reduce((total, currentValue) => total + currentValue.price, 0);
+
     return (
         <div className="App">
             <h1>Cart</h1>
             <div style={wrapperStyle}>{cartProductEles}</div>
+            <div style={totalStyle}>
+                <div>Total: ${totalPrice}</div>
+            </div>
         </div>
     );
 }
