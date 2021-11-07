@@ -29,11 +29,18 @@ function Cart() {
             <div>
                 <img src={product.image} alt={product.name} width="200px" height="200px" style={{objectFit: "cover"}}/>
             </div>
-            <div style={{marginTop: "-4px", padding: "5px", backgroundColor: product.stock <= 10 ? "skyblue" : "orange"}}>
+            <div style={{
+                marginTop: "-4px",
+                padding: "5px",
+                backgroundColor: product.stock <= 10 ? "skyblue" : "orange"
+            }}>
                 <h3>{product.name}</h3>
                 <h3>{product.stock} in stock</h3>
                 <h3>${product.price}</h3>
-                <button onClick={function (){removeFromCart(product)}} style={{margin: "10px"}}>Remove from Cart</button>
+                <button onClick={function () {
+                    removeFromCart(product);
+                }} style={{margin: "10px"}}>Remove from Cart
+                </button>
             </div>
         </div>
     );

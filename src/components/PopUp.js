@@ -2,6 +2,8 @@ import React from "react";
 import {styled, Box} from '@mui/system';
 import ModalUnstyled from '@mui/core/ModalUnstyled';
 import {useSelector} from "react-redux";
+import Store from "./Store";
+import {NavLink} from "react-router-dom";
 
 function PopUp(props) {
     const StyledModal = styled(ModalUnstyled)`
@@ -47,23 +49,25 @@ function PopUp(props) {
     }
 
     const [open, setOpen] = React.useState(true);
-    // const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
+    const handleClose = () => function () {
+        setOpen(false);
+    }
 
     const productEles = useSelector(state => state.products).filter(function (product) {
         try {
-            return product.name === `${props.location.productProp.name}`;
-        } catch(err) {
+            return product.name === `${props.match.params.name}`;
+        } catch (err) {
             return ""
         }
     }).map((product, index) =>
         <div key={index} style={productStyle}>
             <div>
-                <img src={product.image} alt={product.name} width="200px" height="200px"
-                     style={{objectFit: "cover"}}/>
+                <img src={product.image} alt={product.name} width="200px" height="200px" style={{objectFit: "cover"}}/>
             </div>
-            <div style={{marginTop: "-4px", padding: "5px", backgroundColor: product.stock <= 10 ? "skyblue" : "orange"
+            <div style={{
+                marginTop: "-4px",
+                padding: "5px",
+                backgroundColor: product.stock <= 10 ? "skyblue" : "orange"
             }}>
                 <h3>{product.name}</h3>
                 <h3>{product.stock} in stock</h3>
@@ -74,20 +78,20 @@ function PopUp(props) {
 
     return (
         <div>
-            {/*<button type="button" onClick={handleOpen}>*/}
-            {/*    Open modal*/}
-            {/*</button>*/}
-            <StyledModal
-                aria-labelledby="unstyled-modal-title"
-                aria-describedby="unstyled-modal-description"
-                open={open}
-                onClose={handleClose}
-                BackdropComponent={Backdrop}
-            >
-                <Box sx={style}>
-                    {productEles}
-                </Box>
-            </StyledModal>
+            <Store/>
+            <NavLink to={"/"} style={{textDecoration: "none", color: "black"}}>
+                <StyledModal
+                    aria-labelledby="unstyled-modal-title"
+                    aria-describedby="unstyled-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    BackdropComponent={Backdrop}
+                >
+                    <Box sx={style}>
+                        {productEles}
+                    </Box>
+                </StyledModal>
+            </NavLink>
         </div>
     );
 }
