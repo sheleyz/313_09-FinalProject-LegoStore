@@ -1,6 +1,8 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {remove_from_cart} from "../redux/reducers/setActions";
+import {empty_cart} from "../redux/reducers/setActions";
+import {NavLink} from "react-router-dom";
 
 function Cart() {
     let wrapperStyle = {
@@ -37,6 +39,9 @@ function Cart() {
     const removeFromCart = (product) => {
         dispatch(remove_from_cart(product));
     }
+    const emptyCart = () => {
+        dispatch(empty_cart());
+    }
 
     const cartProductEles = useSelector(state => state.cart).map((product, index) =>
         <div key={index} style={productStyle}>
@@ -61,12 +66,24 @@ function Cart() {
 
     const totalPrice = useSelector(state => state.cart).reduce((total, currentValue) => total + currentValue.price, 0);
 
+    // const showPurchaseButton = () => {
+    //     if (useSelector(state => state.cart).length > 0) {
+    //         return ();
+    //     }
+    // }
+
     return (
         <div className="App">
             <h1>Cart</h1>
             <div style={wrapperStyle}>{cartProductEles}</div>
             <div style={totalStyle}>
                 <div>Total: ${totalPrice}</div>
+                <NavLink to={"/"} style={{textDecoration: "none", color: "black"}}>
+                    <button onClick={function () {
+                        emptyCart();
+                    }} style={{margin: "10px"}}>Purchase
+                    </button>
+                </NavLink>
             </div>
         </div>
     );

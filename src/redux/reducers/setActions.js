@@ -18,3 +18,9 @@ export const remove_from_cart = (product) => {
         product: product
     }
 }
+
+export const empty_cart = () => {
+    return {
+        type: "empty_cart"
+    }
+}

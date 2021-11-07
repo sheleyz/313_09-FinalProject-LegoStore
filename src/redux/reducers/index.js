@@ -58,6 +58,12 @@ const rootReducer = (state = initState, action) => {
             cart: removedCartItem
         }
     }
+    if (action.type === 'empty_cart') {
+        return {
+            ...state,
+            cart: []
+        }
+    }
     return state;
 }
 
