@@ -1,5 +1,7 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
+import PopUp from "./PopUp";
 
 function Store() {
     let wrapperStyle = {
@@ -17,21 +19,25 @@ function Store() {
     }
 
     const productEles = useSelector(state => state.products).map((product, index) =>
-        <div key={index} style={productStyle}>
-            <div>
-                <img src={product.image} alt={product.name} width="200px" height="200px" style={{objectFit: "cover"}}/>
+        <NavLink to={{pathname: `/product/${product.name}`, productProp: product}} style={{textDecoration: "none", color: "black"}}>
+            <div key={index} style={productStyle}>
+                <div>
+                    <img src={product.image} alt={product.name} width="200px" height="200px"
+                         style={{objectFit: "cover"}}/>
+                </div>
+                <div style={{marginTop: "-4px", padding: "5px", backgroundColor: product.stock <= 10 ? "skyblue" : "orange"}}>
+                    <h3>{product.name}</h3>
+                    <h3>{product.stock} in stock</h3>
+                    <h3>${product.price}</h3>
+                </div>
             </div>
-            <div style={{marginTop: "-4px", padding: "5px", backgroundColor: product.stock <= 10 ? "skyblue" : "orange"}}>
-                <h3>{product.name}</h3>
-                <h3>{product.stock} in stock</h3>
-                <h3>${product.price}</h3>
-            </div>
-        </div>
+        </NavLink>
     );
 
     return (
         <div className="App" style={wrapperStyle}>
             {productEles}
+            {/*<PopUp/>*/}
         </div>
     );
 }

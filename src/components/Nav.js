@@ -6,7 +6,7 @@ function Nav() {
         padding: "10px",
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "lightgrey"
+        backgroundColor: "darkgrey"
     }
 
     return (
