@@ -24,7 +24,8 @@ const initState = {
             price: 25,
             image: "https://images.unsplash.com/photo-1584847642060-a46e239155a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80"
         }
-    ]
+    ],
+    cart: []
 }
 
 const rootReducer = (state = initState, action) => {
@@ -34,6 +35,27 @@ const rootReducer = (state = initState, action) => {
         return {
             ...state,
             products: newProduct
+        }
+    }
+    if (action.type === 'add_to_cart') {
+        let newCartItem = state.cart;
+        newCartItem.push(action.product);
+        return {
+            ...state,
+            cart: newCartItem
+        }
+    }
+    if (action.type === 'remove_from_cart') {
+        let removedCartItem = state.cart;
+        let index = removedCartItem.indexOf(action.product)
+        if (index !== -1) {
+            removedCartItem.splice(index, 1);
+        }
+        console.log(action.product.name);
+        console.log(removedCartItem);
+        return {
+            ...state,
+            cart: removedCartItem
         }
     }
     return state;

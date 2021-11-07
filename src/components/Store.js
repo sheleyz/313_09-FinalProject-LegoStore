@@ -1,10 +1,12 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
-import PopUp from "./PopUp";
+import {useDispatch, useSelector} from "react-redux";
+// import PopUp from "./PopUp";
+import {add_to_cart} from "../redux/reducers/setActions";
 
 function Store() {
     let wrapperStyle = {
+        minHeight: "414px",
         width: "1000px",
         padding: "10px",
         display: "flex",
@@ -18,9 +20,18 @@ function Store() {
         margin: "10px"
     }
 
+    const dispatch = useDispatch();
+    const addToCart = (product) => {
+        dispatch(add_to_cart(product));
+    }
+
+    // const popUp = (product) => {
+    //     return <PopUp data={product}/>
+    // }
+
     const productEles = useSelector(state => state.products).map((product, index) =>
-        <NavLink to={{pathname: `/product/${product.name}`, productProp: product}} style={{textDecoration: "none", color: "black"}}>
-            <div key={index} style={productStyle}>
+        <NavLink to={{pathname: `/product/${product.name}`, productProp: product}} key={index} style={{textDecoration: "none", color: "black"}}>
+            <div style={productStyle}>
                 <div>
                     <img src={product.image} alt={product.name} width="200px" height="200px"
                          style={{objectFit: "cover"}}/>
@@ -29,14 +40,16 @@ function Store() {
                     <h3>{product.name}</h3>
                     <h3>{product.stock} in stock</h3>
                     <h3>${product.price}</h3>
+                    <button onClick={function (){addToCart(product)}} style={{margin: "10px"}}>Add to Cart</button>
                 </div>
             </div>
         </NavLink>
     );
 
     return (
-        <div className="App" style={wrapperStyle}>
-            {productEles}
+        <div className="App">
+            <h1>Store</h1>
+            <div style={wrapperStyle}>{productEles}</div>
             {/*<PopUp/>*/}
         </div>
     );
