@@ -7,7 +7,6 @@ function Store() {
     let wrapperStyle = {
         minHeight: "414px",
         width: "1000px",
-        padding: "10px",
         display: "flex",
         flexWrap: "wrap",
         backgroundColor: "lightgrey"
@@ -16,7 +15,7 @@ function Store() {
     let productStyle = {
         minHeight: "100px",
         width: "200px",
-        margin: "10px"
+        margin: "20px"
     }
 
     const dispatch = useDispatch();
@@ -52,7 +51,7 @@ function Store() {
     return (
         <div className="App">
             <h1>Store</h1>
-            <div style={wrapperStyle}>{productEles}</div>
+            <div className="productWrapper" style={wrapperStyle}>{productEles}</div>
         </div>
     );
 }

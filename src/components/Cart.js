@@ -8,16 +8,16 @@ function Cart() {
     let wrapperStyle = {
         minHeight: "414px",
         width: "1000px",
-        padding: "10px",
         display: "flex",
         flexWrap: "wrap",
-        backgroundColor: "lightgrey"
+        backgroundColor: "lightgrey",
+        marginBottom: "70px"
     }
 
     let productStyle = {
         minHeight: "100px",
         width: "200px",
-        margin: "10px",
+        margin: "20px",
         textAlign: "center"
     }
 
@@ -29,7 +29,9 @@ function Cart() {
         width: "100vw",
         padding: "10px",
         paddingRight: "20px",
-        backgroundColor: "darkgrey",
+        backgroundColor: "dodgerblue",
+        color: "white",
+        fontWeight: "bold",
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center"
@@ -81,7 +83,7 @@ function Cart() {
     return (
         <div className="App">
             <h1>Cart</h1>
-            <div style={wrapperStyle}>{cartProductEles}</div>
+            <div className="productWrapper" style={wrapperStyle}>{cartProductEles}</div>
             <div style={totalStyle}>
                 <div>Total: ${totalPrice}</div>
                 <NavLink to={"/"} style={{textDecoration: "none", color: "black", display: `${displayPurchase}`}}>

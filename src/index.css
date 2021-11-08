@@ -50,3 +50,9 @@ code {
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .productWrapper {
+    width: 100vw !important;
+  }
+}
