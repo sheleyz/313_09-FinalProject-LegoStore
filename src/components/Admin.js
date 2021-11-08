@@ -37,9 +37,12 @@ function Admin() {
         <div>
             <h1>Admin</h1>
             <div style={inputStyle}>
-                <input type="text" placeholder={"Product Name"} name={"name"} onChange={handleChange} style={{margin: "10px"}}/>
-                <input type="number" placeholder={"Stock"} name={"stock"} onChange={handleChange} style={{margin: "10px"}}/>
-                <input type="number" placeholder={"Price"} name={"price"} onChange={handleChange} style={{margin: "10px"}}/>
+                <input type="text" placeholder={"Product Name"} name={"name"} onChange={handleChange}
+                       style={{margin: "10px"}}/>
+                <input type="number" placeholder={"Stock"} name={"stock"} onChange={handleChange}
+                       style={{margin: "10px"}}/>
+                <input type="number" placeholder={"Price"} name={"price"} onChange={handleChange}
+                       style={{margin: "10px"}}/>
                 <button onClick={addProduct} style={{margin: "10px"}}>Add Product</button>
             </div>
         </div>

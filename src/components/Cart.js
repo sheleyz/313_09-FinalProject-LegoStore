@@ -64,13 +64,19 @@ function Cart() {
         </div>
     );
 
-    const totalPrice = useSelector(state => state.cart).reduce((total, currentValue) => total + currentValue.price, 0);
+    const totalPrice = useSelector(state => state.cart).reduce((total, currentValue) => total + Number(currentValue.price), 0);
 
-    // const showPurchaseButton = () => {
-    //     if (useSelector(state => state.cart).length > 0) {
-    //         return ();
-    //     }
-    // }
+
+    const [displayPurchase, setDisplayPurchase] = React.useState("none");
+
+    React.useEffect(() => {
+        if (totalPrice !== 0) {
+            setDisplayPurchase("initial");
+        } else {
+            setDisplayPurchase("none");
+        }
+    }, [totalPrice]);
+
 
     return (
         <div className="App">
@@ -78,7 +84,7 @@ function Cart() {
             <div style={wrapperStyle}>{cartProductEles}</div>
             <div style={totalStyle}>
                 <div>Total: ${totalPrice}</div>
-                <NavLink to={"/"} style={{textDecoration: "none", color: "black"}}>
+                <NavLink to={"/"} style={{textDecoration: "none", color: "black", display: `${displayPurchase}`}}>
                     <button onClick={function () {
                         emptyCart();
                     }} style={{margin: "10px"}}>Purchase

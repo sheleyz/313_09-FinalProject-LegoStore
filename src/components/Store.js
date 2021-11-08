@@ -25,10 +25,12 @@ function Store() {
     }
 
     const productEles = useSelector(state => state.products).map((product, index) =>
-        <NavLink to={{pathname: `/product/${product.name}`, productProp: product}} key={index} style={{textDecoration: "none", color: "black"}}>
+        <NavLink to={{pathname: `/product/${product.name}`, productProp: product}} key={index}
+                 style={{textDecoration: "none", color: "black"}}>
             <div style={productStyle}>
                 <div>
-                    <img src={product.image} alt={product.name} width="200px" height="200px" style={{objectFit: "cover"}}/>
+                    <img src={product.image} alt={product.name} width="200px" height="200px"
+                         style={{objectFit: "cover"}}/>
                 </div>
                 <div style={{
                     marginTop: "-4px",

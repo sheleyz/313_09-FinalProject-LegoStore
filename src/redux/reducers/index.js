@@ -51,8 +51,8 @@ const rootReducer = (state = initState, action) => {
         if (index !== -1) {
             removedCartItem.splice(index, 1);
         }
-        console.log(action.product.name);
-        console.log(removedCartItem);
+        // console.log(action.product.name);
+        // console.log(removedCartItem);
         return {
             ...state,
             cart: removedCartItem
