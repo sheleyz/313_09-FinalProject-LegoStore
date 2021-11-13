@@ -1,7 +1,5 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {remove_from_cart} from "../redux/reducers/setActions";
-import {empty_cart} from "../redux/reducers/setActions";
+import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 function Cart() {
@@ -37,15 +35,29 @@ function Cart() {
         alignItems: "center"
     }
 
-    const dispatch = useDispatch();
-    const removeFromCart = (product) => {
-        dispatch(remove_from_cart(product));
-    }
-    const emptyCart = () => {
-        dispatch(empty_cart());
+    const [cartData, setCartData] = React.useState(useSelector(state => state.cart));
+    const [cart, setCart] = React.useState([]);
+    const [change, setChange] = React.useState(false);
+
+    React.useEffect(() => {
+        setCart(cartData);
+    }, [cartData, change]);
+
+    const removeFromCart = (product, index) => {
+        let newCart = cartData;
+        newCart.splice(index, 1);
+        setCartData(newCart);
+        setChange(!change);
     }
 
-    const cartProductEles = useSelector(state => state.cart).map((product, index) =>
+    const emptyCart = () => {
+        let newCart = cartData;
+        newCart.splice(0, newCart.length);
+        setCartData(newCart);
+        setChange(!change);
+    }
+
+    const cartProductEles = cart.map((product, index) =>
         <div key={index} style={productStyle}>
             <div>
                 <img src={product.image} alt={product.name} width="200px" height="200px" style={{objectFit: "cover"}}/>
@@ -59,7 +71,7 @@ function Cart() {
                 <h3>{product.stock} in stock</h3>
                 <h3>${product.price}</h3>
                 <button onClick={function () {
-                    removeFromCart(product);
+                    removeFromCart(product, index);
                 }} style={{margin: "10px"}}>Remove from Cart
                 </button>
             </div>
@@ -67,8 +79,6 @@ function Cart() {
     );
 
     const totalPrice = useSelector(state => state.cart).reduce((total, currentValue) => total + Number(currentValue.price), 0);
-
-
     const [displayPurchase, setDisplayPurchase] = React.useState("none");
 
     React.useEffect(() => {

@@ -45,25 +45,6 @@ const rootReducer = (state = initState, action) => {
             cart: newCartItem
         }
     }
-    if (action.type === 'remove_from_cart') {
-        let removedCartItem = state.cart;
-        let index = removedCartItem.indexOf(action.product)
-        if (index !== -1) {
-            removedCartItem.splice(index, 1);
-        }
-        // console.log(action.product.name);
-        // console.log(removedCartItem);
-        return {
-            ...state,
-            cart: removedCartItem
-        }
-    }
-    if (action.type === 'empty_cart') {
-        return {
-            ...state,
-            cart: []
-        }
-    }
     return state;
 }
 
