@@ -41,6 +41,7 @@ function Cart() {
 
     React.useEffect(() => {
         setCart(cartData);
+        localStorage.setItem("localCart", JSON.stringify(cartData));
     }, [cartData, change]);
 
     const removeFromCart = (product, index) => {
