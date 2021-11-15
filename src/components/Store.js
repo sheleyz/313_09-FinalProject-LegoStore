@@ -25,13 +25,11 @@ function Store() {
 
     const store = useSelector(state => state.products);
     localStorage.setItem("localStore", JSON.stringify(store));
-    const localStore = JSON.parse(localStorage.getItem("localStore"));
-    console.log(localStore);
     React.useEffect(() => {
         localStorage.setItem("localStore", JSON.stringify(store));
     }, [store]);
 
-    const productEles = localStore.map((product, index) =>
+    const productEles = store.map((product, index) =>
         <NavLink to={{pathname: `/product/${product.name}`, productProp: product}} key={index}
                  style={{textDecoration: "none", color: "black"}}>
             <div style={productStyle}>

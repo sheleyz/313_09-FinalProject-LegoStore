@@ -39,11 +39,6 @@ function Cart() {
     const [cart, setCart] = React.useState([]);
     const [change, setChange] = React.useState(false);
 
-    React.useEffect(() => {
-        setCart(cartData);
-        localStorage.setItem("localCart", JSON.stringify(cartData));
-    }, [cartData, change]);
-
     const removeFromCart = (product, index) => {
         let newCart = cartData;
         newCart.splice(index, 1);
@@ -57,6 +52,12 @@ function Cart() {
         setCartData(newCart);
         setChange(!change);
     }
+
+    localStorage.setItem("localCart", JSON.stringify(cartData));
+    React.useEffect(() => {
+        setCart(cartData);
+        localStorage.setItem("localCart", JSON.stringify(cartData));
+    }, [cartData, change]);
 
     const cartProductEles = cart.map((product, index) =>
         <div key={index} style={productStyle}>
